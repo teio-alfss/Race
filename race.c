@@ -1,25 +1,55 @@
+/*TEIO*/
 #include "race.h"
 
 
-
-//preenche a matrix==============================================
-void init(char matrix[LIN][COL]){
+//preenche a matrix espaços vazios================================
+void init(char matrix[ROWS][COLUNN] ){
     int i, j;
-    for(i = 0; i <= LIN; i++){
-        for(j = 0; j <= COL; j++){
-            if(i == 0 || i == LIN) {matrix[LIN][COL] = '_';}
-            else matrix[LIN][COL] = ' ';
+        for ( i = 0; i < ROWS; i++){
+            for ( j = 0; j < COLUNN; j++){
+              
+               if (i == 0 || i == (ROWS-1) || j == 0 || j == (COLUNN-1)) matrix[i][j] = '*'; //cria paredes no mapa============
+              
+               else 
+                matrix[i][j] = ' ';
+            }
+            
         }
-    }    
+        
+
+
+}
+//imprimi a matrix jogo===========================================
+void printMatrix(char matrix[ROWS][COLUNN]){
+    int i, j;
+
+        for ( i = 0; i < ROWS; i++){
+            for ( j = 0; j < COLUNN; j++){
+                printf("%c", matrix[i][j]);
+            }
+            printf("\n");
+        }
+    
 }
 
-//imprimi a matrix do jogo na tela================================
-void printMatrix(char matrix[LIN][COL]){
-    int i, j;
-    for(i = 0; i <= LIN; i++){
-        for(j = 0; j <= COL; j++){
-            printf("%c",matrix[LIN][COL]);
-        }
-        printf("\n");
-    }
+
+
+void drawBar(char matrix[ROWS][COLUNN], Bloco barra, int simbolo){
+              
+              matrix[barra.i][barra.j] = simbolo;//cabeca carrinho
+   
+              if(barra.j+1>=0) matrix[barra.i+1][barra.j-1] = simbolo;  //bracos
+              if(barra.j+1>=0) matrix[barra.i+1][barra.j+1] = simbolo;  //bracos
+              if(barra.j+1>=0) matrix[barra.i+1][barra.j-2] = simbolo;  //bracos
+              if(barra.j+1>=0) matrix[barra.i+1][barra.j+2] = simbolo;  //bracos
+
+              if(barra.j+1>=0) matrix[barra.i+1][barra.j] = simbolo;    //corpo
+              if(barra.j+1>=0) matrix[barra.i+2][barra.j] = simbolo;    //corpo
+              
+
+              if(barra.j+1>=0) matrix[barra.i+3][barra.j-1] = simbolo;    //final
+              if(barra.j+1>=0) matrix[barra.i+3][barra.j+1] = simbolo;    //final
+              if(barra.j+1>=0) matrix[barra.i+3][barra.j-2] = simbolo;    //final
+              if(barra.j+1>=0) matrix[barra.i+3][barra.j+2] = simbolo;    //final
+
 }
