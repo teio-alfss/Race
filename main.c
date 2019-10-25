@@ -12,16 +12,24 @@ Alifer da silva souza
 int main (){
    char matrix[ROWS][COLUNN];   
     Bloco tijolo;
+    Bloco carro;
     int keypressed=0;
     
     
     // posicao inicial do avatar
-    tijolo.i =          20;//ROWS/2;  //faz A PECA fica em cima do mapa===============
-    tijolo.j =          3;//COLUNN/2;
+    tijolo.i =          20;//ROWS/2;  //faz A PECA fica embaixo do mapa===============
+    tijolo.j =          7;//COLUNN/2;
     tijolo.tipo =       TIPO_I;
     tijolo.orientacao = ORIENTACAO_LEFT;
     tijolo.width =      5;
     tijolo.height =     1;
+
+    carro.i = 0;
+    carro.j = 3;
+    carro.tipo = TIPO_I;
+    carro.orientacao = ORIENTACAO_LEFT;
+    carro.width = 5;
+    carro.height = 1;
 
 
     init(matrix);
@@ -39,19 +47,21 @@ int main (){
                 printf("dimensao = (%d,%d)\n",tijolo.width, tijolo.height);
             #endif
             
-            //coloca o @ no meio da tela
+
+            drawBar(matrix, carro, PiXEL);
+
+
+            //coloca o carrinho no meio da tela
             drawBar(matrix, tijolo, PiXEL);
 
-
-
-            //mostro a matrix na tela
+            //mostra a matrix na tela
             printMatrix(matrix);
 
             //apaga a posicao anterior
             drawBar(matrix, tijolo, EMPTY);
+            drawBar(matrix, carro, EMPTY);
 
-            //para o @ ir para direita
-           // if(tijolo.i < (ROWS-1)) tijolo.i++;
+
    
         
         //lendo teclas--------------
@@ -69,17 +79,6 @@ int main (){
                     case TECLA_d:
                     case RIGHT: if(tijolo.j < (COLUNN-4)) tijolo.j++; //move para direita------------------
                         break;
-                    
-                   /* case TECLA_ESPACO:
-                    if(tijolo.orientacao == ORIENTACAO_RIGHT)
-                        tijolo.orientacao = ORIENTACAO_UP;
-                        else
-                        tijolo.orientacao++;
-
-                        //inverte as dimensoes do tijolo
-                        int aux = tijolo.width;
-                        tijolo.width = tijolo.height;
-                        tijolo.height = aux;*/
 
                         //arrumando bug cantos
                         if(tijolo.j < (tijolo.width/2))
@@ -88,6 +87,7 @@ int main (){
                                 tijolo.j = COLUNN - (tijolo.width/2) - 1;
                         
             }
+           
            
 }//fim while************************************
     

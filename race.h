@@ -7,6 +7,7 @@ Alifer da silva souza
 */
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <conio.h>//para capturar teclas
 
 
