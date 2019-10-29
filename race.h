@@ -18,8 +18,8 @@ Alifer da silva souza
 
 
 
-#define COLUNN      16
-#define ROWS        25
+#define COLUNN      12
+#define ROWS        26
 #define ESC         27
 #define ARROWS      224
 #define LEFT        75

@@ -10,57 +10,94 @@ Alifer da silva souza
 #define DEBUG 1
 
 int main (){
-   char matrix[ROWS][COLUNN];   
-    Bloco tijolo;
-    Bloco carro;
-    int keypressed=0;
-    
-    
-    // posicao inicial do avatar
-    tijolo.i =          20;//ROWS/2;  //faz A PECA fica embaixo do mapa===============
-    tijolo.j =          7;//COLUNN/2;
-    tijolo.tipo =       TIPO_I;
-    tijolo.orientacao = ORIENTACAO_LEFT;
-    tijolo.width =      5;
-    tijolo.height =     1;
+   srand(time(NULL));
+   int a; 
+   char matrix[ROWS][COLUNN];
+   Bloco carro;
+   Bloco carro_inimigo;
+   Bloco carro_inimigo2;
+   int keypressed = 0;
 
-    carro.i = 0;
-    carro.j = 3;
-    carro.tipo = TIPO_I;
-    carro.orientacao = ORIENTACAO_LEFT;
-    carro.width = 5;
-    carro.height = 1;
+   // posicao inicial do avatar
+   carro.i = 20; //ROWS/2;  //faz A PECA fica embaixo do mapa===============
+   carro.j = 5;  //COLUNN/2;
+   carro.tipo = TIPO_I;
+   carro.orientacao = ORIENTACAO_LEFT;
+   carro.width = 5;
+   carro.height = 1;
 
+   carro_inimigo.i = 1;
+   carro_inimigo.j = 3;
+   carro_inimigo.tipo = TIPO_I;
+   carro_inimigo.orientacao = ORIENTACAO_LEFT;
+   carro_inimigo.width = 5;
+   carro_inimigo.height = 1;
 
-    init(matrix);
+   carro_inimigo2.i = 10;
+   carro_inimigo2.j = 8;
+   carro_inimigo2.tipo = TIPO_I;
+   carro_inimigo2.orientacao = ORIENTACAO_LEFT;
+   carro_inimigo2.width = 5;
+   carro_inimigo2.height = 1;
 
-        //apagar cursor da tela
-        ShowConsoleCursor(0);
-        system("cls");
-        
-        //rotina principal jogo=============================
-        while (keypressed != ESC){
-            gotoxy(0,0);
+   init(matrix);
+
+   //apagar cursor da tela
+   ShowConsoleCursor(0);
+   system("cls");
+
+   //rotina principal jogo=============================
+   while (keypressed != ESC)
+   {
+       gotoxy(0, 0);
 
             #if DEBUG == 1
-                printf("posicao = (%d,%d)\n",tijolo.i, tijolo.j);
-                printf("dimensao = (%d,%d)\n",tijolo.width, tijolo.height);
+                printf("posicao = (%d,%d)\n",carro.i, carro.j);
+                printf("dimensao = (%d,%d)\n",carro.width, carro.height);
             #endif
             
+            a= (rand() % 10);
+            if(carro_inimigo.i >= 24){
+            if(a%2 == 0 && a <= 5){
+                carro_inimigo.j = 8;
+                carro_inimigo2.j = 3;
 
-            drawBar(matrix, carro, PiXEL);
+            }else if(a%2 == 0 && a>5){
+                carro_inimigo.j = 3;
+                carro_inimigo2.j = 8;
 
+            }else if(a%2 == 0 && a >= 5){
+                carro_inimigo.j = 8;
+                carro_inimigo2.j = 8;
+
+            }else if(a%2 != 0 && a < 5){
+                carro_inimigo.j = 3;
+                carro_inimigo2.j = 3;
+            }
+            }
+            if(carro_inimigo2.i >= 10) drawBar(matrix, carro_inimigo, PiXEL); //feito para o 1 carro e o segundo comecar a cair desde o comeco
+                     
+            drawBar(matrix, carro_inimigo2, PiXEL);
 
             //coloca o carrinho no meio da tela
-            drawBar(matrix, tijolo, PiXEL);
+            drawBar(matrix, carro, PiXEL);
 
             //mostra a matrix na tela
             printMatrix(matrix);
 
             //apaga a posicao anterior
-            drawBar(matrix, tijolo, EMPTY);
             drawBar(matrix, carro, EMPTY);
 
+            if (carro_inimigo2.i >= 10) drawBar(matrix, carro_inimigo, EMPTY);//feito para o 1 carro e o segundo comecar a cair desde o comeco
+
+            drawBar(matrix, carro_inimigo2, EMPTY);
+            
+            if(carro_inimigo.i >= 24){
+                carro_inimigo.i = 1;
+                carro_inimigo2.i = 1;
+            }
+            if(carro_inimigo2.i >= 10) carro_inimigo.i++;//feito para o 1 carro e o segundo comecar a cair desde o comeco
+            carro_inimigo2.i++;
 
    
         
@@ -72,19 +109,19 @@ int main (){
                 switch(keypressed){
                     case TECLA_AA:
                     case TECLA_a:
-                    case LEFT: if(tijolo.j > 3) tijolo.j--; //move para esquerda--------------------------
+                    case LEFT: if(carro.j > 3) carro.j--; //move para esquerda--------------------------
                         break; 
 
                     case TECLA_DD:
                     case TECLA_d:
-                    case RIGHT: if(tijolo.j < (COLUNN-4)) tijolo.j++; //move para direita------------------
+                    case RIGHT: if(carro.j < (COLUNN-4)) carro.j++; //move para direita------------------
                         break;
 
                         //arrumando bug cantos
-                        if(tijolo.j < (tijolo.width/2))
-                        tijolo.j = tijolo.width/2;
-                        else if(tijolo.j > COLUNN - (tijolo.width/2) - 1 )
-                                tijolo.j = COLUNN - (tijolo.width/2) - 1;
+                        if(carro.j < (carro.width/2))
+                        carro.j = carro.width/2;
+                        else if(carro.j > COLUNN - (carro.width/2) - 1 )
+                                carro.j = COLUNN - (carro.width/2) - 1;
                         
             }
            
