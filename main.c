@@ -33,7 +33,7 @@ int main (){
    carro_inimigo.width = 5;
    carro_inimigo.height = 1;
 
-   carro_inimigo2.i = 10;
+   carro_inimigo2.i = 19;
    carro_inimigo2.j = 8;
    carro_inimigo2.tipo = TIPO_I;
    carro_inimigo2.orientacao = ORIENTACAO_LEFT;
@@ -55,7 +55,7 @@ int main (){
                 printf("posicao = (%d,%d)\n",carro.i, carro.j);
                 printf("dimensao = (%d,%d)\n",carro.width, carro.height);
             #endif
-            
+            // sorteio do lado das pecas
             a= (rand() % 10);
             if(carro_inimigo.i >= 24){
             if(a%2 == 0 && a <= 5){
@@ -75,7 +75,7 @@ int main (){
                 carro_inimigo2.j = 3;
             }
             }
-            if(carro_inimigo2.i >= 10) drawBar(matrix, carro_inimigo, PiXEL); //feito para o 1 carro e o segundo comecar a cair desde o comeco
+            if(carro_inimigo2.i >= 15) drawBar(matrix, carro_inimigo, PiXEL); //feito para o 1 carro e o segundo comecar a cair desde o comeco
                      
             drawBar(matrix, carro_inimigo2, PiXEL);
 
@@ -96,7 +96,7 @@ int main (){
                 carro_inimigo.i = 1;
                 carro_inimigo2.i = 1;
             }
-            if(carro_inimigo2.i >= 10) carro_inimigo.i++;//feito para o 1 carro e o segundo comecar a cair desde o comeco
+            if(carro_inimigo2.i >= 15) carro_inimigo.i++;//feito para o 1 carro e o segundo comecar a cair desde o comeco
             carro_inimigo2.i++;
 
    
@@ -118,10 +118,10 @@ int main (){
                         break;
 
                         //arrumando bug cantos
-                        if(carro.j < (carro.width/2))
-                        carro.j = carro.width/2;
-                        else if(carro.j > COLUNN - (carro.width/2) - 1 )
-                                carro.j = COLUNN - (carro.width/2) - 1;
+                      //  if(carro.j < (carro.width/2))
+                       // carro.j = carro.width/2;
+                      //  else if(carro.j > COLUNN - (carro.width/2) - 1 )
+                       //         carro.j = COLUNN - (carro.width/2) - 1;
                         
             }
            
