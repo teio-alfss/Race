@@ -5,16 +5,16 @@
 //preenche a matrix espaços vazios================================
 void init(char matrix[ROWS][COLUNN] ){
     int i, j;
-        for ( i = 0; i < ROWS; i++){
-            for ( j = 0; j < COLUNN; j++){
-              
-               if (i == 0 || i == (ROWS - 1)) matrix[i][j] = '*';
-               else if (j == 0 || j == (COLUNN-1)) matrix[i][j] = '|'; //cria paredes no mapa============
-               else 
-                matrix[i][j] = ' ';
+        for ( i = 0; i <= ROWS; i++){
+            for ( j = 0; j <= COLUNN; j++){
+                 if (i == 0 || i == (ROWS -1))  matrix[i][j] = ASTERISCO;
+                 else if (j == 0 || j == (COLUNN-1)) matrix[i][j] = ASTERISCO; //cria paredes no mapa============
+                 else if (j == 1 && i%2 != 0 || j == (COLUNN-2) && i%2 != 0) matrix[i][j] = PiXEL;
+                 else matrix[i][j] = ' ';
             }
-            
         }
+            
+        
         
 
 
