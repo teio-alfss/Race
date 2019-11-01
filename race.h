@@ -53,3 +53,6 @@ void printMatrix(char matrix[ROWS][COLUNN]);
 
 //desenha uma barra usando os simbolos
 void drawBar(char matrix[ROWS][COLUNN], Bloco barra, int simbolo);
+
+//inico dos carrinhos
+void NewCar(Bloco *barra);

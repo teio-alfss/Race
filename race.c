@@ -53,3 +53,12 @@ void drawBar(char matrix[ROWS][COLUNN], Bloco barra, int simbolo){
               if(barra.j+1>=0) matrix[barra.i+3][barra.j+2] = simbolo;    //final
 
 }
+
+
+//inico dos carrinhos
+void NewCar(Bloco *barra){
+    barra->i      = (ROWS-5); //ROWS/2;  //faz A PECA fica embaixo do mapa===============
+    barra->j      = COLUNN/2;
+    barra->height = 1;
+    barra->width  = 5;
+}

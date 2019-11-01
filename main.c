@@ -18,27 +18,17 @@ int main (){
    Bloco carro_inimigo2;
    int keypressed = 0;
 
-   // posicao inicial do avatar
-   carro.i = (ROWS-5); //ROWS/2;  //faz A PECA fica embaixo do mapa===============
-   carro.j = COLUNN/2;
-   carro.width = 5;
-   carro.height = 1;
-
-   carro_inimigo.i = 1;
-   carro_inimigo.j = 4;
-   carro_inimigo.width = 5;
-   carro_inimigo.height = 1;
-
-   carro_inimigo2.i = 1;
-   carro_inimigo2.j = 4;
-   carro_inimigo2.width = 5;
-   carro_inimigo2.height = 1;
-
-   init(matrix);
-
    //apagar cursor da tela
-   ShowConsoleCursor(0);
-   system("cls");
+     ShowConsoleCursor(0);
+     system("cls");
+    
+    //inicia a matrix
+     init(matrix);
+
+    NewCar(&carro);
+    NewCar(&carro_inimigo);
+    NewCar(&carro_inimigo2);
+
 
    //rotina principal jogo=============================
    while (keypressed != ESC){
@@ -71,6 +61,7 @@ int main (){
             if(carro_inimigo2.i >= 15) drawBar(matrix, carro_inimigo, PiXEL); //feito para o 1 carro e o segundo comecar a cair desde o comeco
                      
             drawBar(matrix, carro_inimigo2, PiXEL);
+            
 
             //coloca o carrinho no meio da tela
             drawBar(matrix, carro, PiXEL);
@@ -109,17 +100,9 @@ int main (){
                     case TECLA_DD:
                     case TECLA_d:
                     case RIGHT: if(carro.j < (COLUNN-5)) carro.j++; //move para direita------------------
-                        break;
-
-                        //arrumando bug cantos
-                      //  if(carro.j < (carro.width/2))
-                       // carro.j = carro.width/2;
-                      //  else if(carro.j > COLUNN - (carro.width/2) - 1 )
-                       //         carro.j = COLUNN - (carro.width/2) - 1;
-                        
+                        break;                        
             }
-           
-           
+                   
 }//fim while************************************
     
     system("pause");
