@@ -11,10 +11,11 @@ Alifer da silva souza
 
 int main (){
    srand(time(NULL));
-   int a=0;
-   char matrix[ROWS][COLUNN];
+   int a=0, mapa=0;
+   char matrix[ROWS][COLUMN];
    Bloco carro;
    Bloco carro_inimigo;
+   Bloco carro_inimigo1;
    Bloco carro_inimigo2;
    int keypressed = 0;
 
@@ -23,10 +24,13 @@ int main (){
      system("cls");
     
     //inicia a matrix
-     init(matrix);
+    
+    
+    //init(matrix);
 
     NewCar(&carro);
     NewCar(&carro_inimigo);
+    NewCar(&carro_inimigo1);
     NewCar(&carro_inimigo2);
 
 
@@ -40,51 +44,73 @@ int main (){
             #endif
             // sorteio do lado das pecas
             a = (rand() % 10);
-            if(carro_inimigo.i >= ( COLUNN +3 )){
+            if(carro_inimigo.i >= ( COLUMN +3 )){
             if(a%2 == 0 && a <= 5){
                 carro_inimigo.j = LADOR;
+                carro_inimigo1.j = LADOL;
                 carro_inimigo2.j = LADOL;
+                
 
             }else if(a%2 == 0 && a>5){
                 carro_inimigo.j = LADOL;
+                carro_inimigo1.j = LADOL;
                 carro_inimigo2.j = LADOR;
 
             }else if(a%2 == 0 && a >= 5){
                 carro_inimigo.j = LADOR;
+                carro_inimigo1.j = LADOL;
                 carro_inimigo2.j = LADOR;
 
             }else if(a%2 != 0 && a < 5){
                 carro_inimigo.j = LADOL;
+                carro_inimigo1.j = LADOR;
                 carro_inimigo2.j = LADOL;
             }
             }
-            if(carro_inimigo2.i >= 15) drawBar(matrix, carro_inimigo, PiXEL); //feito para o 1 carro e o segundo comecar a cair desde o comeco
-                     
+
             drawBar(matrix, carro_inimigo2, PiXEL);
+            if(carro_inimigo2.i > 15) drawBar(matrix, carro_inimigo1, PiXEL); //feito para o 1 carro e o segundo comecar a cair desde o comeco
+            if(carro_inimigo1.i > 15) drawBar(matrix, carro_inimigo, PiXEL);   //para o segundo carro comecar a cair  
             
-
-            //coloca o carrinho no meio da tela
+            //carro "amigo" controlado=======
             drawBar(matrix, carro, PiXEL);
+              
+              //mexe a pista
+              if(mapa%2==0 && mapa%3==0) init(matrix);
+              if(mapa%2!=0 && mapa%3!=0) initM(matrix);  
+              mapa++;    
 
-            //mostra a matrix na tela
+ 
+           //mostra a matrix na tela
             printMatrix(matrix);
-
+                       
             //apaga a posicao anterior
             drawBar(matrix, carro, EMPTY);
 
-            if (carro_inimigo2.i >= 10) drawBar(matrix, carro_inimigo, EMPTY);//feito para o 1 carro e o segundo comecar a cair desde o comeco
-
+            drawBar(matrix, carro_inimigo, EMPTY);
+            drawBar(matrix, carro_inimigo1, EMPTY);
             drawBar(matrix, carro_inimigo2, EMPTY);
             
-            if(carro_inimigo.i >= (ROWS-5)){
+          
+          
+          
+            // inicio os carros apos a queda
+            if(carro_inimigo.i > (ROWS-5)){
                 carro_inimigo.i = 1;
+                carro_inimigo1.i =1;
                 carro_inimigo2.i = 1;
             }
-            if(carro_inimigo2.i >= 15) carro_inimigo.i++;//feito para o 1 carro e o segundo comecar a cair desde o comeco
             
-            if(carro_inimigo2.i < (ROWS-5)) carro_inimigo2.i++;
+            if(carro_inimigo2.i > 15) carro_inimigo1.i++;//o 1 carro e o segundo comecar a cair desde o comeco
+            if(carro_inimigo1.i > 15) carro_inimigo.i++;
+            
+             carro_inimigo2.i++;
 
-   
+
+            //colisao de carros==================================================
+            if(carro_inimigo2.j == carro.j && carro_inimigo2.i == carro.i) break;
+            if(carro_inimigo1.j == carro.j && carro_inimigo1.i == carro.i) break;
+            if(carro_inimigo.j == carro.j && carro_inimigo.i == carro.i) break;
         
         //lendo teclas--------------
         keypressed = 0;
@@ -99,7 +125,7 @@ int main (){
 
                     case TECLA_DD:
                     case TECLA_d:
-                    case RIGHT: if(carro.j < (COLUNN-5)) carro.j++; //move para direita------------------
+                    case RIGHT: if(carro.j < (COLUMN-5)) carro.j++; //move para direita------------------
                         break;                        
             }
                    

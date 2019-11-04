@@ -22,7 +22,7 @@ Alifer da silva souza
 
 
 
-#define COLUNN      15
+#define COLUMN      15
 #define ROWS        26
 #define ESC         27
 #define ARROWS      224
@@ -46,13 +46,17 @@ typedef struct {
 
 
 //iniciar a matrix principal ddo jogo
-void init(char matrix[ROWS][COLUNN]);
+void init(char matrix[ROWS][COLUMN]);
+                                        //faz a pista mexe
+//iniciar a matrix principal ddo jogo
+void initM(char matrix[ROWS][COLUMN]);
 
 //imorimi a tela do jogo
-void printMatrix(char matrix[ROWS][COLUNN]);
+void printMatrix(char matrix[ROWS][COLUMN]);
 
 //desenha uma barra usando os simbolos
-void drawBar(char matrix[ROWS][COLUNN], Bloco barra, int simbolo);
+void drawBar(char matrix[ROWS][COLUMN], Bloco barra, int simbolo);
 
 //inico dos carrinhos
 void NewCar(Bloco *barra);
+
