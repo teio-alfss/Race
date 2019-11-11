@@ -6,8 +6,8 @@
 void init(char matrix[ROWS][COLUMN] ){
     int i, j;
         
-        for ( i = 0; i <= ROWS; i++){
-            for ( j = 0; j <= COLUMN; j++){
+        for ( i = 0; i < ROWS; i++){
+            for ( j = 0; j < COLUMN; j++){
                  if (i == 0 || i == (ROWS -1))  matrix[i][j] = ASTERISCO;
                  else if (j == 0 || j == (COLUMN-1)) matrix[i][j] = ASTERISCO; //cria paredes no mapa============
                  else if (j == 1 && i%2 != 0 || j == (COLUMN-2) && i%2 != 0) matrix[i][j] = PiXEL;
@@ -20,8 +20,8 @@ void init(char matrix[ROWS][COLUMN] ){
 void initM(char matrix[ROWS][COLUMN] ){
     int i, j;
         
-        for ( i = 0; i <= ROWS; i++){
-            for ( j = 0; j <= COLUMN; j++){
+        for ( i = 0; i < ROWS; i++){
+            for ( j = 0; j < COLUMN; j++){
                  if (i == 0 || i == (ROWS -1))  matrix[i][j] = ASTERISCO;
                  else if (j == 0 || j == (COLUMN-1)) matrix[i][j] = ASTERISCO; //cria paredes no mapa============
                  else if (j == 1 && i%2 == 0 || j == (COLUMN-2) && i%2 == 0) matrix[i][j] = PiXEL;
@@ -71,8 +71,20 @@ void drawBar(char matrix[ROWS][COLUMN], Bloco barra, int simbolo){
 //inico dos carrinhos
 void NewCar(Bloco *barra){
     barra->i      = (ROWS-5); //ROWS/2;  //faz A PECA fica embaixo do mapa===============
-    barra->j      = COLUMN/2;
+    barra->j      = COLUMN/2; //peca fica no meio
     barra->height = 1;
     barra->width  = 5;
 }
 
+void MenuGame(){
+    printf("\xC9\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBB");
+	printf("\n\xBA     MENU DO JOGO    \xBA");
+	printf("\n\xCC\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xB9\n");	
+	printf("\xBA  1-NOVO JOGO        \xBA\n");
+	printf("\xBA                     \xBA\n");	
+	printf("\xBA  2-RECORDS          \xBA\n");
+	printf("\xBA                     \xBA\n");	
+	printf("\xBA  3-SAIR             \xBA\n");
+	printf("\xBA                     \xBA\n");	
+	printf("\xC8\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBC\n\n");
+}

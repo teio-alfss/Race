@@ -60,3 +60,4 @@ void drawBar(char matrix[ROWS][COLUMN], Bloco barra, int simbolo);
 //inico dos carrinhos
 void NewCar(Bloco *barra);
 
+void MenuGame();
