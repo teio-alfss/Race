@@ -13,7 +13,7 @@ int main (){
    srand(time(NULL));
    
    int keypressed = 0;
-   int score=0;
+   int score=0, tempo=0;
    int a=0, menuJogo;
    float cout=0;
    char matrix[ROWS][COLUMN];
@@ -48,35 +48,36 @@ int main (){
             #if DEBUG == 1
                 printf("posicao = (%d,%d)\n",carro.i, carro.j);
                 printf("dimensao = (%d,%d)\n",carro.width, carro.height);
-                printf("aleatorio --> %f\n",cout);
+                printf("aleatorio --> %i\n",a);
             #endif
+                printf("Pontuação --> %i\n",score);
 
             // sorteio do lado das pecas
             if(carro_inimigo.i > (ROWS - 6)){
-            if(a%2 == 0 && a <= 5){
+            if(a%2 == 0 ){
                 carro_inimigo.j = LADOR;
                 carro_inimigo1.j = LADOL;
                 carro_inimigo2.j = LADOL;
                 
 
-            }else if(a%2 == 0 && a>5){
+            }else if(a%5 == 0 ){
                 carro_inimigo.j = LADOL;
                 carro_inimigo1.j = LADOL;
                 carro_inimigo2.j = LADOR;
 
-            }else if(a%2 == 0 && a >= 5){
+            }else if(a%5 != 0 ){
                 carro_inimigo.j = LADOR;
                 carro_inimigo1.j = LADOL;
                 carro_inimigo2.j = LADOR;
 
-            }else if(a%2 != 0 && a < 5){
+            }else if(a%2 != 0 ){
                 carro_inimigo.j = LADOL;
                 carro_inimigo1.j = LADOR;
                 carro_inimigo2.j = LADOL;
             }
             }
 
-            Sleep(100);
+            if(tempo == 0 || score >= (PONTOS*6)) Sleep(100);
             if(carro_inimigo2.i > 15) carro_inimigo1.i++;//o 1 carro e o segundo comecar a cair desde o comeco
             if(carro_inimigo1.i > 15) carro_inimigo.i++;
             
@@ -88,15 +89,16 @@ int main (){
                 carro_inimigo.i  = 0;
                 carro_inimigo1.i = 0;
                 carro_inimigo2.i = 0;
-                cout++;
-                 //a =0;
-                // a = (rand() % 10);
-            }
+                }
             
                 
             drawBar(matrix, carro_inimigo2, PiXEL);
             if(carro_inimigo2.i > 15) drawBar(matrix, carro_inimigo1, PiXEL); //feito para o 1 carro e o segundo comecar a cair desde o comeco
-            if(carro_inimigo1.i > 15) drawBar(matrix, carro_inimigo, PiXEL);   //para o segundo carro comecar a cair  
+            if(carro_inimigo1.i > 15){
+                 drawBar(matrix, carro_inimigo, PiXEL);   //para o segundo carro comecar a cair
+                 a =0;
+                 a =(rand() % 100);
+            }  
             
             //carro "amigo" controlado=======
             drawBar(matrix, carro, PiXEL);
@@ -111,19 +113,25 @@ int main (){
             drawBar(matrix, carro_inimigo, EMPTY);
             drawBar(matrix, carro_inimigo1, EMPTY);
             drawBar(matrix, carro_inimigo2, EMPTY);
-                 
+
 
             //colisao de carros==================================================
-            if(carro.i == carro_inimigo2.i+3 && (carro.j == carro_inimigo2.j || carro.j-4 == carro_inimigo2.j || carro.j+4 == carro_inimigo2.j ||carro.j-3 == carro_inimigo2.j || carro.j+3 == carro_inimigo2.j) ){
+           if(carro.i == carro_inimigo2.i+3 && (carro.j == carro_inimigo2.j || carro.j-4 == carro_inimigo2.j || carro.j+4 == carro_inimigo2.j ||carro.j-3 == carro_inimigo2.j || carro.j+3 == carro_inimigo2.j || carro.j+2 == carro_inimigo2.j || carro.j-2 == carro_inimigo2.j || carro.j+1 == carro_inimigo2.j || carro.j-1 == carro_inimigo2.j)){
                 printf("!!!!!PERDEU!!!!!\n");
+                carro.j = COLUMN/2;
+                carro_inimigo.i=carro_inimigo1.i=carro_inimigo2.i=0;
                 break;
                 }
-            if(carro.i == carro_inimigo1.i+3 && (carro.j == carro_inimigo1.j || carro.j-4 == carro_inimigo1.j || carro.j+4 == carro_inimigo1.j ||carro.j-3 == carro_inimigo1.j || carro.j+3 == carro_inimigo1.j) ){
+            if(carro.i == carro_inimigo1.i+3 && (carro.j == carro_inimigo1.j || carro.j-4 == carro_inimigo1.j || carro.j+4 == carro_inimigo1.j ||carro.j-3 == carro_inimigo1.j || carro.j+3 == carro_inimigo1.j || carro.j+2 == carro_inimigo1.j || carro.j-2 == carro_inimigo1.j || carro.j+1 == carro_inimigo1.j || carro.j-1 == carro_inimigo1.j)){              
                 printf("!!!!!PERDEU!!!!!\n");
+                carro.j = COLUMN/2;
+                carro_inimigo.i=carro_inimigo1.i=carro_inimigo2.i=0;
                 break;
                 }
-            if(carro.i == carro_inimigo.i+3 && (carro.j == carro_inimigo.j || carro.j-4 == carro_inimigo.j || carro.j+4 == carro_inimigo.j ||carro.j-3 == carro_inimigo.j || carro.j+3 == carro_inimigo.j) ){
+            if(carro.i == carro_inimigo.i+3 && (carro.j == carro_inimigo.j || carro.j-4 == carro_inimigo.j || carro.j+4 == carro_inimigo.j ||carro.j-3 == carro_inimigo.j || carro.j+3 == carro_inimigo.j || carro.j+2 == carro_inimigo.j || carro.j-2 == carro_inimigo.j || carro.j+1 == carro_inimigo.j || carro.j-1 == carro_inimigo.j) ){
                 printf("!!!!!PERDEU!!!!!\n");
+                carro.j = COLUMN/2;
+                carro_inimigo.i=carro_inimigo1.i=carro_inimigo2.i=0;
                 break;
                 }
         
@@ -143,8 +151,9 @@ int main (){
                     case RIGHT: if(carro.j < (COLUMN-5)) carro.j++; //move para direita------------------
                         break;                        
            
-                    case TECLA_ESPACO: Sleep(50);
+                    case TECLA_ESPACO: //tempo=1;
                     break;
+                    tempo =0;
             }
         
 }//fim while jogo************************************

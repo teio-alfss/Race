@@ -19,7 +19,7 @@ Alifer da silva souza
 #define LADOL 4  // lados que os carrinhos /
 #define LADOR 10
 
-
+#define PONTOS  50
 
 
 #define COLUMN      15
