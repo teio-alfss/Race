@@ -45,8 +45,7 @@ void printMatrix(char matrix[ROWS][COLUMN]){
     
 }
 
-
-
+//desenho do carro=============
 void drawBar(char matrix[ROWS][COLUMN], Bloco barra, int simbolo){
               
               matrix[barra.i][barra.j] = simbolo;//cabeca carrinho
@@ -64,6 +63,7 @@ void drawBar(char matrix[ROWS][COLUMN], Bloco barra, int simbolo){
               if(barra.j+1>=0) matrix[barra.i+3][barra.j+1] = simbolo;    //final
               if(barra.j+1>=0) matrix[barra.i+3][barra.j-2] = simbolo;    //final
               if(barra.j+1>=0) matrix[barra.i+3][barra.j+2] = simbolo;    //final
+             
 
 }
 
@@ -72,8 +72,12 @@ void drawBar(char matrix[ROWS][COLUMN], Bloco barra, int simbolo){
 void NewCar(Bloco *barra){
     barra->i      = (ROWS-5); //ROWS/2;  //faz A PECA fica embaixo do mapa===============
     barra->j      = COLUMN/2; //peca fica no meio
-    barra->height = 1;
-    barra->width  = 5;
+}
+
+//novo jogador
+void NewPlayer(highscores *gamer){
+    gamer->name ;
+    gamer->ponto = 0;
 }
 
 void MenuGame(){

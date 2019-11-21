@@ -19,11 +19,11 @@ Alifer da silva souza
 #define LADOL 4  // lados que os carrinhos /
 #define LADOR 10
 
-#define PONTOS  50
+#define PONTOS  200
 
 
 #define COLUMN      15
-#define ROWS        26
+#define ROWS        25
 #define ESC         27
 #define ARROWS      224
 #define LEFT        75
@@ -38,11 +38,13 @@ Alifer da silva souza
 //Estrutura das pecas
 typedef struct {
     int i;// posicao nas linha da matrix
-    int j;//posicao na colunas da matrix
-    int width;//largura da pecas
-    int height;//altura da pecas
-    
+    int j;//posicao na colunas da matrix  
 }Bloco;
+
+typedef struct{
+    char name[20];
+    int ponto;
+}highscores;
 
 
 //iniciar a matrix principal ddo jogo
@@ -60,4 +62,8 @@ void drawBar(char matrix[ROWS][COLUMN], Bloco barra, int simbolo);
 //inico dos carrinhos
 void NewCar(Bloco *barra);
 
+//menu inicial=====================
 void MenuGame();
+
+//jogador
+void NewPlayer(highscores *gamer);
