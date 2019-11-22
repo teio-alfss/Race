@@ -80,6 +80,7 @@ void NewPlayer(highscores *gamer){
     gamer->ponto = 0;
 }
 
+//menu  Jogo
 void MenuGame(){
     printf("\xC9\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBB");
 	printf("\n\xBA     MENU DO JOGO    \xBA");
@@ -91,4 +92,15 @@ void MenuGame(){
 	printf("\xBA  3-SAIR             \xBA\n");
 	printf("\xBA                     \xBA\n");	
 	printf("\xC8\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBC\n\n");
+}
+
+// gera os numeros aleatorios
+int num_aleatorio(){
+    srand(time(NULL));
+    int retorno = 0;
+    
+    retorno = (rand() % 10 );
+
+    return retorno;
+
 }

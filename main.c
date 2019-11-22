@@ -10,24 +10,20 @@ Alifer da silva souza
 #define DEBUG 1
 
 int main (){
-   srand(time(NULL));
+   //srand(time(NULL));
    
    int keypressed = 0;
-   int aleatorio  = 0;
+   int aleatorio;
    int tempo=0, mapa=0;
-   long level = 1;
+   int level = 1;
    int menuJogo;
    char matrix[ROWS][COLUMN];
-   char nameT[20];
+   
    Bloco carro;
-   Bloco carro_inimigo;
-   Bloco carro_inimigo1;
+   Bloco carro_inimigo; 
+   Bloco carro_inimigo1; 
    Bloco carro_inimigo2;
-   highscores playerT;
-   highscores player1;
-   highscores player2;
-   highscores player3;
-
+   highscore playerT;
    
    //apagar cursor da tela
     ShowConsoleCursor(0);
@@ -38,9 +34,6 @@ int main (){
     NewCar(&carro_inimigo1);
     NewCar(&carro_inimigo2);
     NewPlayer(&playerT);
-    NewPlayer(&player1);
-    NewPlayer(&player2);
-    NewPlayer(&player3);
    //rotina menu======================================================
    while (menuJogo != 6){
        
@@ -60,7 +53,7 @@ int main (){
             mapa++;
             #if DEBUG == 1
                 printf("posicao = (%d,%d)\n",carro.i, carro.j);
-                printf("aleatorio --> %ld\n",aleatorio);
+                printf("aleatorio --> %d\n",aleatorio);
             #endif
                 printf("LEVEL --> %ld\nJogador %s\tPontuação --> %i\n", level, playerT.name, playerT.ponto);
 
@@ -101,13 +94,10 @@ int main (){
                         
             // inicio os carros apos a queda
             if(carro_inimigo.i > (ROWS-5)){
-                carro_inimigo.i  = 0;
-                carro_inimigo1.i = 0;
-                carro_inimigo2.i = 0;
+                carro_inimigo.i  = carro_inimigo1.i = carro_inimigo2.i = 0;
             }
             if(carro_inimigo.i == 0 && carro_inimigo1.i == 0 && carro_inimigo2.i == 0){
-                aleatorio = 0;
-                aleatorio = (rand() % 10 );
+               aleatorio = num_aleatorio();
             }
             //==============================================================================================    
             drawBar(matrix, carro_inimigo2, PiXEL);
@@ -174,23 +164,13 @@ int main (){
 }//fim while jogo************************************
     level = 1;
     carro.j = COLUMN/2;
-    carro_inimigo.i=carro_inimigo1.i=carro_inimigo2.i=0;
-    
-                    if(playerT.ponto > player1.ponto) {
-                    //player1.name = nameT;
-                    player1.ponto = playerT.ponto;
-                    //playerT.name='';
-                    playerT.ponto = 0;
-                    
-                }
-
-            
+    carro_inimigo.i=carro_inimigo1.i=carro_inimigo2.i=0;        
 
         system("cls");
         break;
         system("cls");
         case 2: printf("nao confg\n");
-                printf("LISTA DE JOGADORES\n1-%s  --- %d\n", player1.name, player1.ponto);
+                printf("LISTA DE JOGADORES\n1-%s  --- %d\n", playerT.name, playerT.ponto);
                 //system("cls");
                 system("pause");
         break;

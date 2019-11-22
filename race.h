@@ -67,3 +67,6 @@ void MenuGame();
 
 //jogador
 void NewPlayer(highscores *gamer);
+
+//aleatorios
+int num_aleatorio();
