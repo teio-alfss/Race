@@ -35,19 +35,19 @@ Alifer da silva souza
 #define TECLA_ESPACO 32
 
 
-//Estrutura das pecas
+//Estrutura das pecas----------------------
 typedef struct {
     int i;// posicao nas linha da matrix
     int j;//posicao na colunas da matrix  
 }Bloco;
 
+//jogadore==================================
 typedef struct{
     char name[20];
-    int ponto;
-}highscores;
+    int ponto, cod;
+}Score;
 
-
-//iniciar a matrix principal ddo jogo
+//iniciar a matrix principal ddo jogo-------
 void init(char matrix[ROWS][COLUMN]);
                                         //faz a pista mexe
 //iniciar a matrix principal ddo jogo
@@ -66,7 +66,7 @@ void NewCar(Bloco *barra);
 void MenuGame();
 
 //jogador
-void NewPlayer(highscores *gamer);
+void NewPlayer(Score *gamer);
 
 //aleatorios
 int num_aleatorio();

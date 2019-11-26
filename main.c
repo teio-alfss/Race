@@ -10,8 +10,15 @@ Alifer da silva souza
 #define DEBUG 1
 
 int main (){
-   //srand(time(NULL));
    
+    FILE *scores;
+    int codi;
+    
+
+
+
+
+
    int keypressed = 0;
    int aleatorio;
    int tempo=0, mapa=0;
@@ -23,8 +30,8 @@ int main (){
    Bloco carro_inimigo; 
    Bloco carro_inimigo1; 
    Bloco carro_inimigo2;
-   highscore playerT;
-   
+   Score playerT;
+      
    //apagar cursor da tela
     ShowConsoleCursor(0);
     system("cls");
@@ -34,6 +41,7 @@ int main (){
     NewCar(&carro_inimigo1);
     NewCar(&carro_inimigo2);
     NewPlayer(&playerT);
+    
    //rotina menu======================================================
    while (menuJogo != 6){
        
@@ -119,11 +127,11 @@ int main (){
             drawBar(matrix, carro_inimigo2, EMPTY);
 
            //colisao de carros==================================================
-           //if(carro.i == carro_inimigo2.i+3 && (carro.j == carro_inimigo2.j || carro.j-4 == carro_inimigo2.j || carro.j+4 == carro_inimigo2.j ||carro.j-3 == carro_inimigo2.j || carro.j+3 == carro_inimigo2.j || carro.j+2 == carro_inimigo2.j || carro.j-2 == carro_inimigo2.j || carro.j+1 == carro_inimigo2.j || carro.j-1 == carro_inimigo2.j)){
-               // printf("!!!!!PERDEU!!!!!\n");
-               // system("pause");
-               // break;
-               // }
+           if(carro.i == carro_inimigo2.i+3 && (carro.j == carro_inimigo2.j || carro.j-4 == carro_inimigo2.j || carro.j+4 == carro_inimigo2.j ||carro.j-3 == carro_inimigo2.j || carro.j+3 == carro_inimigo2.j || carro.j+2 == carro_inimigo2.j || carro.j-2 == carro_inimigo2.j || carro.j+1 == carro_inimigo2.j || carro.j-1 == carro_inimigo2.j)){
+                printf("!!!!!PERDEU!!!!!\n");
+                system("pause");
+                break;
+                }
            /* if(carro.i == carro_inimigo1.i+3 && (carro.j == carro_inimigo1.j || carro.j-4 == carro_inimigo1.j || carro.j+4 == carro_inimigo1.j ||carro.j-3 == carro_inimigo1.j || carro.j+3 == carro_inimigo1.j || carro.j+2 == carro_inimigo1.j || carro.j-2 == carro_inimigo1.j || carro.j+1 == carro_inimigo1.j || carro.j-1 == carro_inimigo1.j)){              
                 printf("!!!!!PERDEU!!!!!\n");
                 system("pause");
@@ -162,7 +170,28 @@ int main (){
             }
         
 }//fim while jogo************************************
+    
+    scores = fopen("highscore.txt","w");
+        if(scores == NULL){
+            printf("error");
+            exit (0);
+        }
+    codi++;
+    playerT.cod = codi;
+    fwrite(&playerT, 100, 1, scores);
+
+    fclose(scores);
+
+
+
+
+
+
+
+    
+    
     level = 1;
+    playerT.ponto = 0;
     carro.j = COLUMN/2;
     carro_inimigo.i=carro_inimigo1.i=carro_inimigo2.i=0;        
 
@@ -170,8 +199,10 @@ int main (){
         break;
         system("cls");
         case 2: printf("nao confg\n");
-                printf("LISTA DE JOGADORES\n1-%s  --- %d\n", playerT.name, playerT.ponto);
-                //system("cls");
+                printf("LISTA DE JOGADORES\n");
+                while(playerT.cod == sizeof(Score)){
+                printf("1-%s  --- %d\n", playerT.name, playerT.ponto);
+                }
                 system("pause");
         break;
         

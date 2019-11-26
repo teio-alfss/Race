@@ -74,11 +74,11 @@ void NewCar(Bloco *barra){
     barra->j      = COLUMN/2; //peca fica no meio
 }
 
-//novo jogador
-void NewPlayer(highscores *gamer){
-    gamer->name ;
-    gamer->ponto = 0;
-}
+//novo jogador-------------------------------------
+void NewPlayer(Score *gamer){
+    
+    gamer ->ponto= 0; 
+}//
 
 //menu  Jogo
 void MenuGame(){
@@ -94,7 +94,7 @@ void MenuGame(){
 	printf("\xC8\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xCD\xBC\n\n");
 }
 
-// gera os numeros aleatorios
+// gera os numeros aleatorios------------------------------------------------------------------------------
 int num_aleatorio(){
     srand(time(NULL));
     int retorno = 0;
@@ -102,5 +102,4 @@ int num_aleatorio(){
     retorno = (rand() % 10 );
 
     return retorno;
-
 }
