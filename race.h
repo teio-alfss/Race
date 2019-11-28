@@ -19,7 +19,7 @@ Alifer da silva souza
 #define LADOL 4  // lados que os carrinhos /
 #define LADOR 10
 
-#define PONTOS  200
+#define PONTOS  50
 
 
 #define COLUMN      15
@@ -70,3 +70,6 @@ void NewPlayer(Score *gamer);
 
 //aleatorios
 int num_aleatorio();
+
+//colisao
+int Colisao(char matrix[ROWS][COLUMN], Bloco carro, Bloco carro_ini);

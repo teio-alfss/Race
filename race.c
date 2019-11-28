@@ -74,11 +74,10 @@ void NewCar(Bloco *barra){
     barra->j      = COLUMN/2; //peca fica no meio
 }
 
-//novo jogador-------------------------------------
 void NewPlayer(Score *gamer){
-    
-    gamer ->ponto= 0; 
-}//
+    gamer -> ponto = 0;
+}
+
 
 //menu  Jogo
 void MenuGame(){
@@ -95,11 +94,23 @@ void MenuGame(){
 }
 
 // gera os numeros aleatorios------------------------------------------------------------------------------
-int num_aleatorio(){
+int num_aleatorio(int *retorno){
     srand(time(NULL));
-    int retorno = 0;
     
-    retorno = (rand() % 10 );
+    
+    *retorno = (rand() % 100 );
 
+    return *retorno;
+}
+
+
+
+int Colisao(char matrix[ROWS][COLUMN], Bloco carro, Bloco carro_ini){
+
+    int retorno = 0;
+
+    if(carro.i == carro_ini.i+3 && (carro.j == carro_ini.j || carro.j-4 == carro_ini.j || carro.j+4 == carro_ini.j ||carro.j-3 == carro_ini.j || carro.j+3 == carro_ini.j || carro.j+2 == carro_ini.j || carro.j-2 == carro_ini.j || carro.j+1 == carro_ini.j || carro.j-1 == carro_ini.j)){        
+        retorno = 1;
+    }
     return retorno;
 }
