@@ -1,8 +1,8 @@
-/*TEIO*/
-/*jogo interativo tetris
-para rodar no terminal 
-para executar start .\programa.exe
-Alifer da silva souza
+/*        ***TEIO***
+Alifer da Silva Souza -TADS-19
+
+trabalho final semestre jogo Car Racing......
+03/12/2019
 */
 #include "race.h"
 #include "display.h"
@@ -17,6 +17,7 @@ int main (){
    int level = 1;
    int menuJogo;
    char matrix[ROWS][COLUMN];
+   char escolha;
    
    Bloco carro;
    Bloco carro_inimigo; 
@@ -40,7 +41,7 @@ int main (){
        MenuGame();
        scanf("%i",&menuJogo);
        if(menuJogo == 1){
-       printf("Digite nume jogador:");
+       printf("Digite nome jogador:");
        fflush(stdin);
        gets(playerT.name);
        }
@@ -51,42 +52,38 @@ int main (){
             while (keypressed != ESC){
             gotoxy(0, 0);
             mapa++;
-            #if DEBUG == 1
-                printf("posicao = (%d,%d)\n",carro.i, carro.j);
-                printf("aleatorio --> %d\n",aleatorio);
-                printf("LEVEL --> %d\nJogador %s\tPontuação --> %i\n", level, playerT.name, playerT.ponto);
-            #endif
-                
+      
+            printf("posicao = (%d,%d)\n",carro.i, carro.j);
+            printf("LEVEL --> %i\nJogador--> %s\tPontos --> %i\n", level, playerT.name, playerT.ponto);    
+            //printf("%i\n",mapa);
 
             if(mapa%4==0) init(matrix);
             if(mapa%4!=0) initM(matrix); 
             
 
             // sorteio do lado das pecas
-           // 
-            //se todos os carros no inicio da pista gera o numero aleatorio para novas pocisao
-            if(carro_inimigo.i == 0 && carro_inimigo1.i == 0 && carro_inimigo2.i == 0) aleatorio = num_aleatorio();
+           // if(carro_inimigo.i == 0 && carro_inimigo1.i == 0 && carro_inimigo2.i == 0) aleatorio = num_aleatorio();
             if(carro_inimigo.i > (ROWS - 6)){
-            if(aleatorio%2 == 0 ){
-                carro_inimigo.j = LADOR;
-                carro_inimigo1.j = LADOL;
-                carro_inimigo2.j = LADOL;
                 
-
-            }else if(aleatorio%5 == 0 ){
-                carro_inimigo.j = LADOL;
-                carro_inimigo1.j = LADOL;
-                carro_inimigo2.j = LADOR;
-
-            }else if(aleatorio%5 != 0 ){
-                carro_inimigo.j = LADOR;
-                carro_inimigo1.j = LADOL;
-                carro_inimigo2.j = LADOR;
-
-            }else if(aleatorio%2 != 0 ){
-                carro_inimigo.j = LADOL;
-                carro_inimigo1.j = LADOR;
+            if(lados_aleatorios() == 0){
                 carro_inimigo2.j = LADOL;
+                carro_inimigo1.j = LADOL;
+                carro_inimigo.j  = LADOR;
+
+            }else if(lados_aleatorios() == 1){
+                carro_inimigo.j = LADOL;
+                carro_inimigo1.j= LADOR;
+                carro_inimigo2.j= LADOL;
+
+            }else if(lados_aleatorios() == 2){
+                carro_inimigo2.j = LADOR;
+                carro_inimigo1.j = LADOR;
+                carro_inimigo.j  = LADOL;
+
+            }else if(lados_aleatorios() == 3){
+                carro_inimigo.j = LADOR;
+                carro_inimigo1.j= LADOL;
+                carro_inimigo2.j= LADOR;
             }
             }
             if(playerT.ponto > 800){
@@ -105,7 +102,7 @@ int main (){
             //==============================================================================================    
             drawBar(matrix, carro_inimigo2, PiXEL);
             if(carro_inimigo2.i > 15) drawBar(matrix, carro_inimigo1, PiXEL); //feito para o 1 carro e o segundo comecar a cair desde o comeco
-            if(carro_inimigo1.i > 15) drawBar(matrix, carro_inimigo, PiXEL);   //para o segundo carro comecar a cair
+            if(carro_inimigo1.i > 15) drawBar(matrix, carro_inimigo, PiXEL);  //para o segundo carro comecar a cair
                 
             
             //carro "amigo" controlado==========================================================
@@ -137,12 +134,13 @@ int main (){
                 break;
             }
 
-//Pontuação dp joogo=================================================
+//Pontuação do joogo=================================================
     if(carro_inimigo2.i == carro.i || carro_inimigo1.i == carro.i || carro_inimigo.i == carro.i) playerT.ponto += PONTOS;
 
 
         if(playerT.ponto >= 600)tempo = 1;//controla a velocidade jogo 1 = rapidp
         if(playerT.ponto < 600) tempo = 0;//controla a velocidade 0 lento e faz o jogadore fica precionando o botao
+        
         //lendo teclas--------------
         keypressed = 0;
         if(kbhit()) keypressed = getch();
@@ -166,7 +164,7 @@ int main (){
         
 }//fim while jogo************************************
     level = 1;
-    playerT.ponto = 0;
+    playerT.ponto = mapa = 0;
     carro.j = COLUMN/2;
     carro_inimigo.i=carro_inimigo1.i=carro_inimigo2.i=0;        
 
@@ -182,7 +180,7 @@ int main (){
         break;
         
         case 3: printf("QUER SAIR DO JOGO\n\t(s/n)\n");
-                char escolha;
+                
                 scanf("%c",&escolha);
                 switch(escolha){
                     case 's':

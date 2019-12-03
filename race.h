@@ -1,9 +1,8 @@
-/*TEIO*/
-/*jogo interativo tetris
-para rodar no terminal
-programado em .c 
+/*        ***TEIO***
+Alifer da silva souza -TADS-19
 
-Alifer da silva souza
+trabalho final semestre jogo Car Racing......
+03/12/2019
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -47,29 +46,29 @@ typedef struct{
     int ponto, cod;
 }Score;
 
-//iniciar a matrix principal ddo jogo-------
+//iniciar a matrix principal do jogo-------
 void init(char matrix[ROWS][COLUMN]);
-                                        //faz a pista mexe
-//iniciar a matrix principal ddo jogo
+                                        //faz a pista mexer
+//iniciar a matrix principal do jogo
 void initM(char matrix[ROWS][COLUMN]);
 
-//imorimi a tela do jogo
+//imprimi a matrix jogo===========================================
 void printMatrix(char matrix[ROWS][COLUMN]);
 
-//desenha uma barra usando os simbolos
+//desenho do carro=============================================================
 void drawBar(char matrix[ROWS][COLUMN], Bloco barra, int simbolo);
 
 //inico dos carrinhos
 void NewCar(Bloco *barra);
 
-//menu inicial=====================
-void MenuGame();
-
-//jogador
+//inicia joagador
 void NewPlayer(Score *gamer);
 
-//aleatorios
-int num_aleatorio();
+//menu Jogo------------------------------------------------------
+void MenuGame();
 
-//colisao
+//verifica colisao entre os carros====================================================
 int Colisao(char matrix[ROWS][COLUMN], Bloco carro, Bloco carro_ini);
+
+////gera numeros aleatorios para escolher lados das pecas inimigas
+int lados_aleatorios();
